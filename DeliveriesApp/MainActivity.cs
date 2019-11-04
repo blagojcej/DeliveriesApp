@@ -1,4 +1,5 @@
-﻿using Android.App;
+﻿using System.Linq;
+using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Support.V7.App;
@@ -41,7 +42,35 @@ namespace DeliveriesApp
 
         private void SignInButton_Click(object sender, System.EventArgs e)
         {
-            
+            var email = emailEditText.Text.Trim();
+            var password = passwordEditText.Text.Trim();
+
+            if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password))
+            {
+                Database.Connection.CreateTable<User>();
+
+                User existingUser = null;
+
+                //If we have rows in users table
+                if (Database.Connection.Table<User>().Any())
+                {
+                    existingUser = Database.Connection.Get<User>(user => user.Email == email);
+                }
+
+                //If user exist login user and password match with one in database
+                if (existingUser != null &&
+                    string.CompareOrdinal(password, existingUser.Password.Trim()) == 0)
+                {
+
+                    Toast.MakeText(this, "Login succesfull", ToastLength.Long).Show();
+                    return;
+                }
+
+                Toast.MakeText(this, "Incorrect email or password", ToastLength.Long).Show();
+                return;
+            }
+
+            Toast.MakeText(this, "Email or Password can not be empty", ToastLength.Long).Show();
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
