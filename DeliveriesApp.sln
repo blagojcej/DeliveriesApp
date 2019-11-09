@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.902
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliveriesApp", "DeliveriesApp\DeliveriesApp.csproj", "{3BC0AC7E-3B3B-4D3F-9CC0-B2BDECC460A6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliveriesApp.Shared", "DeliveriesApp.Shared\DeliveriesApp.Shared.csproj", "{C5EA3287-66A9-4C0A-B6F0-D379B35CAF72}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +19,10 @@ Global
 		{3BC0AC7E-3B3B-4D3F-9CC0-B2BDECC460A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BC0AC7E-3B3B-4D3F-9CC0-B2BDECC460A6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3BC0AC7E-3B3B-4D3F-9CC0-B2BDECC460A6}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{C5EA3287-66A9-4C0A-B6F0-D379B35CAF72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5EA3287-66A9-4C0A-B6F0-D379B35CAF72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5EA3287-66A9-4C0A-B6F0-D379B35CAF72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5EA3287-66A9-4C0A-B6F0-D379B35CAF72}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

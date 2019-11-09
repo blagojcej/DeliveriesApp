@@ -5,6 +5,7 @@ using Android.OS;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
+using DeliveriesApp.Shared.Model;
 
 namespace DeliveriesApp
 {
@@ -40,37 +41,25 @@ namespace DeliveriesApp
             StartActivity(intent);
         }
 
-        private void SignInButton_Click(object sender, System.EventArgs e)
+        private async void SignInButton_Click(object sender, System.EventArgs e)
         {
             var email = emailEditText.Text.Trim();
             var password = passwordEditText.Text.Trim();
 
-            if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password))
+            var result = await User.Login(email, password);
+
+            switch (result)
             {
-                Database.Connection.CreateTable<User>();
-
-                User existingUser = null;
-
-                //If we have rows in users table
-                if (Database.Connection.Table<User>().Any())
-                {
-                    existingUser = Database.Connection.Get<User>(user => user.Email == email);
-                }
-
-                //If user exist login user and password match with one in database
-                if (existingUser != null &&
-                    string.CompareOrdinal(password, existingUser.Password.Trim()) == 0)
-                {
-
+                case UserStatus.SuccessfullyLoggedIn:
                     Toast.MakeText(this, "Login succesfull", ToastLength.Long).Show();
-                    return;
-                }
-
-                Toast.MakeText(this, "Incorrect email or password", ToastLength.Long).Show();
-                return;
+                    break;
+                case UserStatus.WrongCredentials:
+                    Toast.MakeText(this, "Incorrect email or password", ToastLength.Long).Show();
+                    break;
+                default:
+                    Toast.MakeText(this, "Unknown Error", ToastLength.Long).Show();
+                    break;
             }
-
-            Toast.MakeText(this, "Email or Password can not be empty", ToastLength.Long).Show();
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)

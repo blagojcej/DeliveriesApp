@@ -1,22 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using SQLite;
+using System;
 using System.IO;
-using System.Linq;
-using System.Text;
 
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using SQLite;
-using Environment = System.Environment;
-
-namespace DeliveriesApp
+namespace DeliveriesApp.Shared.Model
 {
     public static class Database
     {
+        #region Properties
+
         public static SQLiteConnection Connection
         {
             get
@@ -37,5 +28,26 @@ namespace DeliveriesApp
                 }
             }
         }
+
+        #endregion Properties
+
+        #region Methods
+
+        public static bool Insert<T>(T item)
+        {
+            try
+            {
+                Connection.CreateTable<T>();
+                Connection.Insert(item);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+        }
+
+        #endregion Methods
     }
 }
