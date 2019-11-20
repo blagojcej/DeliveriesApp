@@ -51,7 +51,13 @@ namespace DeliveriesApp
             switch (result)
             {
                 case UserStatus.SuccessfullyLoggedIn:
+                {
                     Toast.MakeText(this, "Login succesfull", ToastLength.Long).Show();
+                    Intent intent=new Intent(this, typeof(TabsActivity));
+                    StartActivity(intent);
+                    //Remove this activity from the stack, so we can not go to the login page with back button
+                    Finish();
+                }
                     break;
                 case UserStatus.WrongCredentials:
                     Toast.MakeText(this, "Incorrect email or password", ToastLength.Long).Show();
