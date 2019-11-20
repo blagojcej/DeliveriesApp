@@ -36,7 +36,17 @@ namespace DeliveriesApp.Shared.Model
             List<Delivery> deliveries=new List<Delivery>();
 
             Database.Connection.CreateTable<Delivery>();
-            deliveries = Database.Connection.Table<Delivery>().ToList();
+            deliveries = Database.Connection.Table<Delivery>().Where(d => d.Status != 2).ToList();
+
+            return deliveries;
+        }
+
+        public static List<Delivery> GetDelivered()
+        {
+            List<Delivery> deliveries=new List<Delivery>();
+
+            Database.Connection.CreateTable<Delivery>();
+            deliveries = Database.Connection.Table<Delivery>().Where(d => d.Status == 2).ToList();
 
             return deliveries;
         }
@@ -45,6 +55,11 @@ namespace DeliveriesApp.Shared.Model
         {
             Database.Connection.CreateTable<Delivery>();
             return Database.Connection.Insert(delivery);
+        }
+
+        public override string ToString()
+        {
+            return $"{Name} - {Status}";
         }
     }
 }

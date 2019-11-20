@@ -10,22 +10,21 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using DeliveriesApp.Shared.Model;
 
 namespace DeliveriesApp
 {
-    public class DeliveriesFragment : Android.Support.V4.App.Fragment //To support older versions of android
+    public class DeliveriesFragment : Android.Support.V4.App.ListFragment //To support older versions of android
     {
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
             // Create your fragment here
-        }
-
-        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-        {
-            // Use this to return your custom view for this Fragment
-            return inflater.Inflate(Resource.Layout.deliveries, container, false);
+            var deliveries = Delivery.GetDeliveries();
+            //We can not use this as Context in fragment because it needs to be an activity
+            //ListAdapter = new ArrayAdapter(Activity, Android.Resource.Layout.SimpleListItem1, deliveries);
+            ListAdapter=new DeliveryAdapter(Activity, deliveries);
         }
     }
 }
